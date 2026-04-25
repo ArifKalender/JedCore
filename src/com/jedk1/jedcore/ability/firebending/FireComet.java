@@ -12,10 +12,10 @@ import com.projectkorra.projectkorra.ability.FireAbility;
 import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.region.RegionProtection;
 import com.projectkorra.projectkorra.util.DamageHandler;
-import com.projectkorra.projectkorra.util.ParticleEffect;
 import com.projectkorra.projectkorra.util.TempFallingBlock;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.BlockState;
 import org.bukkit.configuration.ConfigurationSection;
@@ -217,7 +217,7 @@ public class FireComet extends FireAbility implements AddonAbility {
 		}
 
 		playFirebendingParticles(location, 20, Math.random(), Math.random(), Math.random());
-		ParticleEffect.FIREWORKS_SPARK.display(location, 20,  Math.random(), Math.random(), Math.random(), 0.5);
+		location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location, 20, Math.random(), Math.random(), Math.random(), 0.5);
 
 		JCMethods.emitLight(location);
 
@@ -254,19 +254,10 @@ public class FireComet extends FireAbility implements AddonAbility {
 		rotateAroundAxisX(v1, -xRotation);
 		rotateAroundAxisY(v1, -((location.getYaw() * Math.PI / 180) - 1.575));
 
-//		if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-//			ParticleEffect.SOUL_FIRE_FLAME.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//			ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//			ParticleEffect.SOUL_FIRE_FLAME.display(location.clone().add(v1), 1, 0, 0, 0, 0.01);
-//		} else {
-//			ParticleEffect.FLAME.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//			ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//			ParticleEffect.FLAME.display(location.clone().add(v1), 1, 0, 0, 0, 0.01);
-//		}
 		playFirebendingParticles(location.clone().add(v), 1, 0, 0, 0);
 		playFirebendingParticles(location.clone().add(v1), 1, 0, 0, 0);
-		ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-		ParticleEffect.SMOKE_LARGE.display(location.clone().add(v1), 1, 0, 0, 0, 0.02);
+		location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location.clone().add(v), 1, 0, 0, 0, 0.02);
+		location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location.clone().add(v1), 1, 0, 0, 0, 0.02);
 
 		JCMethods.emitLight(location.clone().add(v));
 		JCMethods.emitLight(location.clone().add(v1));
@@ -281,29 +272,19 @@ public class FireComet extends FireAbility implements AddonAbility {
 
 		for (int i = 0; i < 360; i += 45) {
 			for (Location l : JCMethods.getVerticalCirclePoints(location.clone().subtract(0, size, 0), 45, size, i)) {
-//				if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-//					ParticleEffect.SOUL_FIRE_FLAME.display(l, 1, 0, 0, 0, 0.02);
-//				} else {
-//					ParticleEffect.FLAME.display(l, 1, 0, 0, 0, 0.02);
-//				}
 				playFirebendingParticles(l, 1, 0, 0, 0);
 				JCMethods.emitLight(l);
 			}
 		}
 
 		if (size == 1.5) {
-			ParticleEffect.EXPLOSION_LARGE.display(this.location, 3, Math.random(), Math.random(), Math.random(), 0.03);
+			this.location.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, this.location, 3, Math.random(), Math.random(), Math.random(), 0.03);
 		}
 	}
 
 	public void displayComet() {
 		for (int angle = 0; angle < 360; angle += 45) {
 			for (Location l : JCMethods.getVerticalCirclePoints(location.clone().subtract(0, 1.5, 0), 45, 1.5, angle)) {
-//				if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-//					ParticleEffect.SOUL_FIRE_FLAME.display(l, 1, 0, 0, 0, 0.05);
-//				} else {
-//					ParticleEffect.FLAME.display(l, 1, 0, 0, 0, 0.05);
-//				}
 				playFirebendingParticles(l, 1, 0, 0, 0);
 				JCMethods.emitLight(l);
 			}
@@ -323,19 +304,10 @@ public class FireComet extends FireAbility implements AddonAbility {
 			rotateAroundAxisX(v1, -xRotation);
 			rotateAroundAxisY(v1, -((location.getYaw() * Math.PI / 180) - 1.575));
 
-//			if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-//				ParticleEffect.SOUL_FIRE_FLAME.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//				ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//				ParticleEffect.SOUL_FIRE_FLAME.display(location.clone().add(v1), 1, 0, 0, 0, 0.01);
-//			} else {
-//				ParticleEffect.FLAME.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//				ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-//				ParticleEffect.FLAME.display(location.clone().add(v1), 1, 0, 0, 0, 0.01);
-//			}
 			playFirebendingParticles(location.clone().add(v), 1, 0, 0, 0);
 			playFirebendingParticles(location.clone().add(v1), 1, 0, 0, 0);
-			ParticleEffect.SMOKE_LARGE.display(location.clone().add(v), 1, 0, 0, 0, 0.02);
-			ParticleEffect.SMOKE_LARGE.display(location.clone().add(v1), 1, 0, 0, 0, 0.02);
+			location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location.clone().add(v), 1, 0, 0, 0, 0.02);
+			location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location.clone().add(v1), 1, 0, 0, 0, 0.02);
 
 			JCMethods.emitLight(location.clone().add(v));
 			JCMethods.emitLight(location.clone().add(v1));

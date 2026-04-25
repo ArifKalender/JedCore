@@ -23,14 +23,8 @@ import com.projectkorra.projectkorra.ability.util.Collision;
 import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.region.RegionProtection;
 import com.projectkorra.projectkorra.util.DamageHandler;
-import com.projectkorra.projectkorra.util.ParticleEffect;
 import com.projectkorra.projectkorra.util.TempBlock;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
-import org.bukkit.Tag;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
@@ -258,7 +252,7 @@ public class Combustion extends CombustionAbility implements AddonAbility {
 				}
 
 				if (charged) {
-					ParticleEffect.SMOKE_LARGE.display(player.getLocation(), 1, Math.random(), Math.random(), Math.random(), 0.1);
+					player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 1, Math.random(), Math.random(), Math.random(), 0.1f);
 				}
 			} else {
 				if (charged) {
@@ -284,7 +278,7 @@ public class Combustion extends CombustionAbility implements AddonAbility {
 
 				Location loc = player.getLocation().add(x, 1.0D, z);
 				playFirebendingParticles(loc, 3, 0.0, 0.0, 0.0);
-				ParticleEffect.SMOKE_NORMAL.display(loc, 4, 0.0, 0.0, 0.0, 0.01);
+				loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, loc, 4, 0, 0, 0, 0.01f);
 				JCMethods.emitLight(loc);
 			}
 		}
@@ -392,13 +386,9 @@ public class Combustion extends CombustionAbility implements AddonAbility {
 		}
 
 		private void render() {
-			if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-				ParticleEffect.SOUL_FIRE_FLAME.display(location, 1, 0.0, 0.0, 0.0, 0.03);
-			} else {
-				ParticleEffect.FLAME.display(location, 1, 0.0, 0.0, 0.0, 0.03);
-			}
-			ParticleEffect.SMOKE_LARGE.display(location, 1, 0.0, 0.0, 0.0F, 0.06);
-			ParticleEffect.FIREWORKS_SPARK.display(location, 1, 0.0, 0.0, 0.0F, 0.06);
+			playFirebendingParticles(location, 1, 0, 0, 0);
+			location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 1, 0, 0, 0, 0.06f);
+			location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location, 1, 0, 0, 0, 0.06f);
 
 			location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1.0F, 0.01F);
 
@@ -515,16 +505,13 @@ public class Combustion extends CombustionAbility implements AddonAbility {
 		}
 
 		private void render(Location location) {
-			if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-				ParticleEffect.SOUL_FIRE_FLAME.display(location, 20, Math.random(), Math.random(), Math.random(), 0.5);
-			} else {
-				ParticleEffect.FLAME.display(location, 20, Math.random(), Math.random(), Math.random(), 0.5);
-			}
-			ParticleEffect.SMOKE_LARGE.display(location, 20, Math.random(), Math.random(), Math.random(), 0.5);
-			ParticleEffect.FIREWORKS_SPARK.display(location, 20, Math.random(), Math.random(), Math.random(), 0.5);
-			ParticleEffect.SMOKE_LARGE.display(location, 20, Math.random(), Math.random(), Math.random());
-			ParticleEffect.EXPLOSION_HUGE.display(location, 20, Math.random(), Math.random(), Math.random(), 0.5);
+			Particle particle = bPlayer.canUseSubElement(SubElement.BLUE_FIRE) ? Particle.SOUL_FIRE_FLAME : Particle.FLAME;
+			location.getWorld().spawnParticle(particle, location, 20, Math.random(), Math.random(), Math.random(), 0.5f);
 
+			location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 20, Math.random(), Math.random(), Math.random(), 0.5f);
+			location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location, 20, Math.random(), Math.random(), Math.random(), 0.5f);
+			location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 20, Math.random(), Math.random(), Math.random());
+			location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location, 20, Math.random(), Math.random(), Math.random());
 			location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1f, 1f);
 		}
 

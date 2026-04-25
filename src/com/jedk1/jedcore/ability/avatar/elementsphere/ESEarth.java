@@ -12,10 +12,10 @@ import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.command.Commands;
 import com.projectkorra.projectkorra.region.RegionProtection;
 import com.projectkorra.projectkorra.util.DamageHandler;
-import com.projectkorra.projectkorra.util.ParticleEffect;
 import com.projectkorra.projectkorra.util.TempFallingBlock;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -108,14 +108,14 @@ public class ESEarth extends AvatarAbility implements AddonAbility {
 		ESEarth es = (ESEarth) tempfallingblock.getAbility();
 		Player player = es.getPlayer();
 
-		ParticleEffect.SMOKE_LARGE.display(fb.getLocation(), 0, 0, 0, 0.3F, 25);
+		fb.getWorld().spawnParticle(Particle.SMOKE_LARGE, fb.getLocation(), 25, 0, 0, 0, 0.3F);
 		fb.getWorld().playSound(fb.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 2f, 0.5f);
 
 		ThreadLocalRandom rand = ThreadLocalRandom.current();
 
 		for (Location l : GeneralMethods.getCircle(fb.getLocation(), es.impactSize, 1, false, true, 0)) {
 			if (isBreakable(l.getBlock()) && !RegionProtection.isRegionProtected(player, l, "ElementSphere") && EarthAbility.isEarthbendable(player, l.getBlock())) {
-				ParticleEffect.SMOKE_LARGE.display(l, 0, 0, 0, 0.1F, 2);
+				l.getWorld().spawnParticle(Particle.SMOKE_LARGE, 2, 0, 0, 0, 0.1F);
 				new RegenTempBlock(l.getBlock(), Material.AIR, Material.AIR.createBlockData(), rand.nextInt((int) es.revertDelay - (int) (es.revertDelay - 1000)) + (es.revertDelay - 1000), false);
 			}
 

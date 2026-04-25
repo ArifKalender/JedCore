@@ -10,8 +10,8 @@ import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.command.Commands;
 import com.projectkorra.projectkorra.region.RegionProtection;
 import com.projectkorra.projectkorra.util.DamageHandler;
-import com.projectkorra.projectkorra.util.ParticleEffect;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
@@ -203,16 +203,16 @@ public class AirBreath extends AirAbility implements AddonAbility {
 
 	private void displayBeamParticles(Location loc, double size) {
 		if (isWater(loc.getBlock())) {
-			ParticleEffect.WATER_BUBBLE.display(loc, particles, Math.random(), Math.random(), Math.random(), size);
+			loc.getWorld().spawnParticle(Particle.WATER_BUBBLE, loc, particles, Math.random(), Math.random(), Math.random(), size);
 		}
 
-		ParticleEffect mainParticle = getAirbendingParticles();
-		if (mainParticle == ParticleEffect.CLOUD) {
-			ParticleEffect.CLOUD.display(loc, particles, Math.random(), Math.random(), Math.random(), size);
+		Particle mainParticle = getAirbendingParticles();
+		if (mainParticle == Particle.CLOUD) {
+			loc.getWorld().spawnParticle(Particle.CLOUD, loc, particles, Math.random(), Math.random(), Math.random(), size);
 			JCMethods.displayColoredParticles("#FFFFFF", loc, particles, Math.random(), Math.random(), Math.random(), 0f);
 			JCMethods.displayColoredParticles("#FFFFFF", player.getLocation(), particles, Math.random(), Math.random(), Math.random(), size, 50);
-		} else if (mainParticle != null) {
-			mainParticle.display(loc, particles, Math.random(), Math.random(), Math.random(), size);
+		} else {
+			playAirbendingParticles(loc, particles, Math.random(), Math.random(), Math.random());
 		}
 	}
 
