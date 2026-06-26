@@ -110,7 +110,7 @@ public class AirBlade extends AirAbility implements AddonAbility {
 
 			for (double i = -90 + pitch; i <= 90 + pitch; i += 8) {
 				Location tempLoc = calculateParticleLocation(i);
-				playAirbendingParticles(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
+				playAirbendingParticlesInstanced(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
 
 				if (j == 0 && blockCuttingEnabled && cuttableBlocks.contains(tempLoc.getBlock().getType()) && !RegionProtection.isRegionProtected(this.player, tempLoc)) {
 					if (revertCutBlocks) {

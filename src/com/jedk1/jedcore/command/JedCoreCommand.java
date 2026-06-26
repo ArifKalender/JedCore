@@ -35,7 +35,7 @@ public class JedCoreCommand extends PKCommand {
 	}
 
 	public static void sendBuildInfo(CommandSender sender) {
-		sender.sendMessage(ChatColor.GRAY + "Running JedCore Build: " + ChatColor.RED + JedCore.plugin.getDescription().getVersion());
+		sender.sendMessage(ChatColor.GRAY + "Running Custom JedCore Build: " + ChatColor.RED + JedCore.plugin.getDescription().getVersion());
 		sender.sendMessage(ChatColor.GRAY + "Developed by: " + ChatColor.RED + JedCore.plugin.getDescription().getAuthors().toString().replace("[", "").replace("]", ""));
 		sender.sendMessage(ChatColor.GRAY + "Modified by: " + ChatColor.RED + "plushmonkey");
 		sender.sendMessage(ChatColor.GRAY + "Maintained by: " + ChatColor.RED + "Cozmyc");

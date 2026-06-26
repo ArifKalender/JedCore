@@ -137,11 +137,7 @@ public class FireShots extends FireAbility implements AddonAbility {
 					return false;
 				}
 
-				if (bPlayer.canUseSubElement(SubElement.BLUE_FIRE)) {
-					location.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, location, 5, 0, 0, 0, 0.02);
-				} else {
-					location.getWorld().spawnParticle(Particle.FLAME, location, 5, 0, 0, 0, 0.02);
-				}
+				playFirebendingParticles(location, 5, 0, 0, 0);
 				location.getWorld().spawnParticle(Particle.SMOKE_NORMAL, location, 2, 0, 0, 0, 0.01);
 
 				JCMethods.emitLight(location);

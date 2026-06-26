@@ -96,7 +96,7 @@ public class AirSlam extends AirAbility implements AddonAbility, ComboAbility {
 			return;
 		}
 
-		playAirbendingParticles(target.getLocation(), 10);
+		playAirbendingParticlesInstanced(target.getLocation(), 10);
 	}
 
 	@Override

@@ -282,9 +282,8 @@ public class AbilityListener implements Listener {
 				}
 				if (abilClass.equals(LavaThrow.class)) {
 					LavaThrow lt = CoreAbility.getAbility(player, LavaThrow.class);
-					if (lt != null) {
-						lt.createBlast();
-					}
+					if (lt == null) new LavaThrow(player);
+					else lt.createBlast();
 				}
 				if (abilClass.equals(MetalFragments.class)) {
 					MetalFragments.shootFragment(player);
@@ -481,12 +480,12 @@ public class AbilityListener implements Listener {
 				if (abilClass.equals(Shockwave.class)) {
 					Crevice.closeCrevice(player);
 				}
-				if (abilClass.equals(LavaThrow.class)) {
+				/*if (abilClass.equals(LavaThrow.class)) {
 					LavaThrow lt = CoreAbility.getAbility(player, LavaThrow.class);
 					if (lt == null) {
 						new LavaThrow(player);
 					}
-				}
+				}*/
 			}
 
 			if (coreAbil instanceof FireAbility && bPlayer.isElementToggled(Element.FIRE)) {

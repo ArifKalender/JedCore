@@ -186,16 +186,11 @@ public class MetalFragments extends MetalAbility implements AddonAbility {
 		if (block == null)
 			return false;
 
-		if (EarthAbility.getMovedEarth().containsKey(block))
-			return false;
-
 		return isMetal(block);
 	}
 
 	public Block selectSource() {
 		Block block = BlockSource.getEarthSourceBlock(player, selectRange, ClickType.SHIFT_DOWN);
-		if (EarthAbility.getMovedEarth().containsKey(block))
-			return null;
 		if (isMetal(block))
 			return block;
 		return null;

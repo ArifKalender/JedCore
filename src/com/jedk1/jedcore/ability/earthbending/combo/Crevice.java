@@ -100,7 +100,7 @@ public class Crevice extends EarthAbility implements AddonAbility, ComboAbility 
 
 	private Block findValidTargetBlock(Block initialBlock) {
 		Block targetBlock = initialBlock;
-		if (!isEarthbendable(targetBlock) || EarthAbility.getMovedEarth().containsKey(targetBlock)) {
+		if (!isEarthbendable(targetBlock)) {
 			return null;
 		}
 
@@ -245,7 +245,7 @@ public class Crevice extends EarthAbility implements AddonAbility, ComboAbility 
 			if (i == 0 && !isTransparent(tempLoc.getBlock())) {
 				continue;
 			}
-			if (i > 0 && (!isEarthbendable(tempLoc.getBlock()) || EarthAbility.getMovedEarth().containsKey(tempLoc.getBlock()))) {
+			if (i > 0 && (!isEarthbendable(tempLoc.getBlock()))) {
 				continue;
 			}
 

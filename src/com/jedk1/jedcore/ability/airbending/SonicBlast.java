@@ -105,7 +105,7 @@ public class SonicBlast extends AirAbility implements AddonAbility {
 	private void handleCharging() {
 		direction = player.getEyeLocation().getDirection().normalize();
 		if (isCharged) {
-			playAirbendingParticles(player.getLocation().add(0, 1, 0), 5, (float) Math.random(), (float) Math.random(), (float) Math.random());
+			playAirbendingParticlesInstanced(player.getLocation().add(0, 1, 0), 5, (float) Math.random(), (float) Math.random(), (float) Math.random());
 		} else if (System.currentTimeMillis() > getStartTime() + warmup) {
 			isCharged = true;
 		}
@@ -148,7 +148,7 @@ public class SonicBlast extends AirAbility implements AddonAbility {
 				Location temp = location.clone();
 				Vector dir = GeneralMethods.getOrthogonalVector(direction.clone(), angle, 1);
 				temp.add(dir);
-				playAirbendingParticles(temp, 1, 0, 0, 0);
+				playAirbendingParticlesInstanced(temp, 1, 0, 0, 0);
 			}
 
 			boolean hit = CollisionDetector.checkEntityCollisions(player, new Sphere(location.toVector(), entityCollisionRadius), entity -> {

@@ -91,9 +91,6 @@ public class SandBlast extends SandAbility implements AddonAbility {
 		source = getEarthSourceBlock(sourceRange);
 
 		if (source != null) {
-			if (EarthAbility.getMovedEarth().containsKey(source)) {
-				return false;
-			}
 			if (isSand(source) && ElementalAbility.isAir(source.getRelative(BlockFace.UP).getType())) {
 				this.sourceData = source.getBlockData().clone();
 				if (DensityShift.isPassiveSand(source)) {

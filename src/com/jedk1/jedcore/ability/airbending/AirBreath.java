@@ -206,13 +206,13 @@ public class AirBreath extends AirAbility implements AddonAbility {
 			loc.getWorld().spawnParticle(Particle.WATER_BUBBLE, loc, particles, Math.random(), Math.random(), Math.random(), size);
 		}
 
-		Particle mainParticle = getAirbendingParticles();
+		Particle mainParticle = getAirbendingParticlesInstanced();
 		if (mainParticle == Particle.CLOUD) {
 			loc.getWorld().spawnParticle(Particle.CLOUD, loc, particles, Math.random(), Math.random(), Math.random(), size);
 			JCMethods.displayColoredParticles("#FFFFFF", loc, particles, Math.random(), Math.random(), Math.random(), 0f);
 			JCMethods.displayColoredParticles("#FFFFFF", player.getLocation(), particles, Math.random(), Math.random(), Math.random(), size, 50);
 		} else {
-			playAirbendingParticles(loc, particles, Math.random(), Math.random(), Math.random());
+			playAirbendingParticlesInstanced(loc, particles, Math.random(), Math.random(), Math.random());
 		}
 	}
 

@@ -28,6 +28,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LavaThrow extends LavaAbility implements AddonAbility {
@@ -117,32 +120,38 @@ public class LavaThrow extends LavaAbility implements AddonAbility {
 	}
 
 	private boolean prepare() {
-		Block targetBlock = getTargetLavaBlock(sourceRange);
+		Block targetBlock = getRandomSourceBlock(location, sourceRange);
 
-		if (targetBlock != null && !TempBlock.isTempBlock(targetBlock) && !EarthAbility.getMovedEarth().containsKey(targetBlock)) {
+		if (targetBlock != null) {
 			selectedSource = targetBlock;
 			return true;
 		}
 
 		return false;
 	}
+	public static Block getRandomSourceBlock(Location location, int radius) {
+		Random rand = new Random();
+		List<Integer> checked = new ArrayList<>();
+		List<Block> blocks = GeneralMethods.getBlocksAroundPoint(location, radius);
 
-	public Block getTargetLavaBlock(int maxDistance) {
-		Location eyeLocation = player.getEyeLocation();
-		Vector direction = eyeLocation.getDirection();
-		World world = player.getWorld();
+		for (int i = 0; i < blocks.size(); i++) {
+			int index = rand.nextInt(blocks.size());
 
-		RayTraceResult result = world.rayTraceBlocks(
-				eyeLocation, direction, maxDistance,
-				FluidCollisionMode.ALWAYS, true
-		);
-
-		if (result != null) {
-			Block hitBlock = result.getHitBlock();
-			if (LavaAbility.isLava(hitBlock)) {
-				return hitBlock;
+			while (checked.contains(index)) {
+				index = rand.nextInt(blocks.size());
 			}
+
+			checked.add(index);
+
+			Block block = blocks.get(index);
+
+			if (!LavaAbility.isLava(block)) {
+				continue;
+			}
+
+			return block;
 		}
+
 		return null;
 	}
 
@@ -340,5 +349,14 @@ public class LavaThrow extends LavaAbility implements AddonAbility {
 	public boolean isEnabled() {
 		ConfigurationSection config = JedCoreConfig.getConfig(this.player);
 		return config.getBoolean("Abilities.Earth.LavaThrow.Enabled");
+	}
+	public static void createBlast(Player player) {
+		if (hasAbility(player, LavaThrow.class)) {
+			LavaThrow lt = getAbility(player, LavaThrow.class);
+
+			if (lt.shots < lt.shotMax) {
+				lt.createBlast();
+			}
+		}
 	}
 }

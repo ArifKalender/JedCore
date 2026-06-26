@@ -98,7 +98,7 @@ public class SwiftStream extends FlightAbility implements AddonAbility, ComboAbi
 			return;
 		}
 		
-		playAirbendingParticles(player.getLocation(), 4);
+		playAirbendingParticlesInstanced(player.getLocation(), 4);
 		affectNearby();
 	}
 	

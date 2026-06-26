@@ -342,10 +342,6 @@ public class MagmaBlast extends LavaAbility implements AddonAbility, ComboAbilit
 		TempBlock closest = null;
 
 		for (TempBlock tempBlock : blocks) {
-			Block block = tempBlock.getLocation().getBlock();
-			if (EarthAbility.getMovedEarth().containsKey(block)) {
-				continue;
-			}
 			double currentDistSq = tempBlock.getLocation().distanceSquared(target);
 
 			if (currentDistSq < distanceSq) {

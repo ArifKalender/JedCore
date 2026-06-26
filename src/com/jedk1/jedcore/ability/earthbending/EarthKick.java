@@ -102,20 +102,8 @@ public class EarthKick extends EarthAbility implements AddonAbility {
 	private boolean prepare() {
 		block = player.getTargetBlock(getTransparentMaterialSet(), sourceRange);
 
-		if (EarthAbility.getMovedEarth().containsKey(block)) {
-			return false;
-		}
-
 		if (!isEarthbendable(player, block)) {
 			return false;
-		}
-
-		if (TempBlock.isTempBlock(block)) {
-			TempBlock.get(block).revertBlock();
-		}
-
-		if (DensityShift.isPassiveSand(block)) {
-			DensityShift.revertSand(block);
 		}
 
 		if (block != null && (allowMetal || !isMetal(block))) {
@@ -153,10 +141,6 @@ public class EarthKick extends EarthAbility implements AddonAbility {
 
 	private void launchBlocks() {
 		if (replaceSource) {
-			if (getMovedEarth().containsKey(block)) {
-				block.setType(Material.AIR);
-			}
-
 			if (block.getType() != Material.AIR) {
 				TempBlock air = new TempBlock(block, Material.AIR);
 				air.setRevertTime(5000L);

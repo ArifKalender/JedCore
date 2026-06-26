@@ -350,11 +350,13 @@ public class LightningBurst extends LightningAbility implements AddonAbility {
 				if (entity instanceof LivingEntity && entity.getEntityId() != player.getEntityId() && doDamage) {
 					DamageHandler.damageEntity(entity, damage, ability);
 				}
-				if (ThreadLocalRandom.current().nextDouble() <= ability.stunChance) {
-					final MovementHandler mh = new MovementHandler((LivingEntity) entity, ability);
-					if (entity instanceof Player && BendingPlayer.getBendingPlayer((Player) entity).isAvatarState())
-						continue;
-					mh.stopWithDuration((long) ability.stunDuration, Element.LIGHTNING.getColor() + "* Electrocuted *"); // @Todo; make message configurable in core pk
+				if (entity instanceof LivingEntity && entity.getEntityId() != player.getEntityId()) {
+					if (ThreadLocalRandom.current().nextDouble() <= ability.stunChance) {
+						final MovementHandler mh = new MovementHandler((LivingEntity) entity, ability);
+						if (entity instanceof Player && BendingPlayer.getBendingPlayer((Player) entity).isAvatarState())
+							continue;
+						mh.stopWithDuration((long) ability.stunDuration, Element.LIGHTNING.getColor() + "* Electrocuted *"); // @Todo; make message configurable in core pk
+					}
 				}
 			}
 		}

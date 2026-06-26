@@ -257,9 +257,6 @@ public class JCMethods {
 	 * @return
 	 */
 	public static boolean isAdjacentToThreeOrMoreSources(Block block, Material type) {
-		if (TempBlock.isTempBlock(block)) {
-			return false;
-		}
 		int sources = 0;
 		BlockFace[] faces = { BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.UP, BlockFace.DOWN };
 		for (BlockFace face : faces) {

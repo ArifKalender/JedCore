@@ -120,7 +120,7 @@ public class AirGlide extends AirAbility implements AddonAbility {
 
 			GeneralMethods.setVelocity(this, player, shootFromPlayer);
 
-			playAirbendingParticles(player.getLocation(), particles);
+			playAirbendingParticlesInstanced(player.getLocation(), particles);
 		} else if (!isTransparent(player.getLocation().getBlock().getRelative(BlockFace.DOWN))) {
 			remove();
 		}

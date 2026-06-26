@@ -236,7 +236,7 @@ public class FireBreath extends FireAbility implements AddonAbility {
 
 	private void displayParticle(Location location, int amount, int r, int g, int b) {
 		String pName = GeneralMethods.getMCVersion() >= 1210 ? "DUST" : "REDSTONE";
-		location.getWorld().spawnParticle(Particle.valueOf(pName), location,0, 0, 0, 0,0.005);
+		location.getWorld().spawnParticle(Particle.valueOf(pName), location,amount, 0, 0, 0,0.005, new Particle.DustOptions(Color.fromRGB(r, g, b), 1));
 		JCMethods.emitLight(location);
 	}
 

@@ -82,9 +82,6 @@ public class MetalShred extends MetalAbility implements AddonAbility {
 	public boolean selectSource() {
 		Block b = BlockSource.getEarthSourceBlock(player, selectRange, ClickType.SHIFT_DOWN);
 
-		if (EarthAbility.getMovedEarth().containsKey(b))
-			return false;
-
 		if (!isMetal(b))
 			return false;
 

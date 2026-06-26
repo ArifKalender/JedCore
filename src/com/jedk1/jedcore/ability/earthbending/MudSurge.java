@@ -211,7 +211,7 @@ public class MudSurge extends EarthAbility implements AddonAbility {
 	}
 
 	private boolean isValidMudSource(Block block) {
-		return block != null && !EarthAbility.getMovedEarth().containsKey(block);
+		return block != null;
 	}
 
 	private void startSurge() {
